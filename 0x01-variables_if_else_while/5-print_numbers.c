@@ -13,6 +13,7 @@ int main(void)
 printf("%digit", digit);
 {
 	printf("\n");
+}
 
 	return (0);
 }
