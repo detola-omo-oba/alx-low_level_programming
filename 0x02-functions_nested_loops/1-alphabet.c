@@ -9,17 +9,17 @@
 int main(void)
 
 {
-	int alphabet;
+	int print_alphabet;
 
-	for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
+	for (print_alphabet = 'a'; print_alphabet <= 'z'; print_alphabet++)
 
 	{
-		putchar(alphabet);
+		putchar(print_alphabet);
 	}
 
 	putchar('\n');
 
-	alphabet();
+	print_alphabet();
 
 	return (0);
 
