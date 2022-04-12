@@ -6,20 +6,18 @@
  * Return: Always 0 (success)
  */
 
-int main(void)
+void print_alphabet(void);
 
 {
-	int print_alphabet;
+	char alphabet;
 
-	for (print_alphabet = 'a'; print_alphabet <= 'z'; print_alphabet++)
+	for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
 
 	{
-		putchar(print_alphabet);
+		_putchar(alphabet);
 	}
 
 	putchar('\n');
-
-	print_alphabet();
 
 	return (0);
 
