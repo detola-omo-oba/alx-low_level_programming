@@ -7,11 +7,9 @@
 
 int main(void)
 {
-	int i;
 
-	{
-		printf("_putchar\n");
-	}
+	printf("_putchar\n");
 
 	return (0);
+
 }
