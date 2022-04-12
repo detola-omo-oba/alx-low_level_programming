@@ -19,6 +19,8 @@ int main(void)
 
 	putchar('\n');
 
+	alphabet();
+
 	return (0);
 
 }
