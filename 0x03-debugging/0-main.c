@@ -1,7 +1,8 @@
 #include "main.h"
+#include <time.h>
 
 /**
- * main - Test function for positive or negative
+ * main - Test function that checks if integer is positive or negative
  *
  * Return: 0
  */
@@ -15,4 +16,5 @@ int main(void)
 	positive_or_negative(i);
 
 	return (0);
+
 }
