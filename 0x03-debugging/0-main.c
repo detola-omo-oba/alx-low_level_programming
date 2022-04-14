@@ -2,8 +2,7 @@
 #include <time.h>
 
 /**
- * main - Test function that checks if integer is positive or negative
- *
+ * main - tests function that prints if integer is positive or negative
  * Return: 0
  */
 
