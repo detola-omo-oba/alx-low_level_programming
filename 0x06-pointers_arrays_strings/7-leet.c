@@ -17,4 +17,13 @@ char *leet(char *string);
 	for (a = 0; string[a] != '\0'; a++)
 	{
 		for (b = 0; lower[b] != '\0' && upper[b] != '\0'; b++)
-
+		{
+			if (string[a] == lower[b] || string[a] == upper[b])
+			{
+				string[a] = number[b];
+				break;
+			}
+		}
+	}
+	return (string);
+}
