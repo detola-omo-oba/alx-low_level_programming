@@ -5,7 +5,7 @@
  * Return: returns translated string
  */
 
-char *leet(char *string);
+char *leet(char *string)
 {
 	int a;
 	int b;
@@ -20,7 +20,7 @@ char *leet(char *string);
 		{
 			if (string[a] == lower[b] || string[a] == upper[b])
 			{
-				string[a] = number[b];
+				string[a] = numbers[b];
 				break;
 			}
 		}
