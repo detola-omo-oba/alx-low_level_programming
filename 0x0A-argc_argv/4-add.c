@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * main - entry ppoint
+ * main - entry point
  * @argc: count of args
  * @argv: array of char
  * Return: always 0
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 			return (1);
 		}
 		sum += atoi(argv[i]);
+
 	}
 	printf("%d\n", sum);
 	return (0);
