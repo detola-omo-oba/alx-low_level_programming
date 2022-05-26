@@ -1,64 +1,66 @@
 #include "lists.h"
 
 /**
- * insert_nodeint_at_index - returns the nth node
- * @head: pointer to the head
- * @idx: index of the node
- * @n: content of the new node
- * Return: address of node
+ * _listint_len - returns the number of elements
+ * @h: linked list type
+ * Return: the number of nodes
+ */
+
+size_t _listint_len(const listint_t *h)
+{
+	unsigned int count = 0;
+
+	while (h)
+	{
+		count++;
+		h = h->next;
+	}
+
+	return (count);
+}
+
+/**
+ * insert_nodeint_at_index - inserts a new node
+ * @head: pointer to a pointer
+ * @idx: index to linked list
+ * @n: number to linked list
+ * Return: node by index
  */
 
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
-	listint_t *new_node = NULL;
-	listint_t *previous_node = NULL;
 	unsigned int i = 0;
+	listint_t *node = *head, *newNode;
 
-	new_node = malloc(sizeof(listint_t));
-	if (new_node == NULL || idx > listint_len(*head))
-	{
-		free(new_node);
+	if (!head || idx > _listint_len(*head))
 		return (NULL);
-	}
-	new_node->n = n;
-	new_node->next = NULL;
-	while (head != NULL)
+
+	if (!idx)
 	{
-		if (i == idx)
+		newNode = malloc(sizeof(listint_t));
+		if (!newNode)
+			return (NULL);
+		newNode->next = *head;
+		newNode->n = n;
+		*head = newNode;
+		return (newNode);
+	}
+
+	while (node)
+	{
+		if (i == (idx - 1))
 		{
-			if (i == 0)
-			{
-				new_node->next = *head;
-				*head = new_node;
-				return (new_node);
-			}
-			new_node->next = previous_node->next;
-			previous_node->next = new_node;
-			return (new_node);
+			newNode = malloc(sizeof(listint_t));
+			if (!newNode)
+				return (NULL);
+
+			newNode->n = n;
+			newNode->next = node->next;
+			node->next = newNode;
+			return (newNode);
 		}
-		else if ((i + 1) == idx)
-			previous_node = *head;
-		head = &((*head)->next);
+		node = node->next;
 		i++;
 	}
 	return (NULL);
-}
-
-/**
- * listint_len - counts number of nodes
- * @h: head of list
- * Return: number of elements
- */
-
-size_t listint_len(const listint_t *h)
-{
-	const listint_t *cursor = h;
-	size_t count = 0;
-
-	while (cursor != NULL)
-	{
-		count += 1;
-		cursor = cursor->next;
-	}
-	return (count);
 }
