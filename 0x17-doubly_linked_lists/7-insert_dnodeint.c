@@ -1,75 +1,49 @@
 #include "lists.h"
-#include <stdlib.h>
 
 /**
- * create_dnode - creates a new DLL node with data
- * @n: data to add to node
- *
- * Return: pointer to newly allocated/populated node
- */
-dlistint_t *create_dnode(const int n)
-{
-	dlistint_t *new_node = NULL;
-
-	new_node = malloc(sizeof(dlistint_t));
-	if (!new_node)
-		return (NULL);
-
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	new_node->n = n;
-
-	return (new_node);
-}
-
-/**
- * insert_dnodeint_at_index - inserts a node at position
- * in a doubly linked list
- * @h: double pointer to the head, so we can modify if needed
- * @idx: index to insert new node at
- * @n: data to add to new node
- *
- * Return: pointer to new element, NULL on failure.
+ * insert_dnodeint_at_index - Inserts a node at a given position.
+ * @h: Pointer to a pointer to the first node on a linked list.
+ * @idx: Position for node to be inserted.
+ * @n: Number in the node.
+ * Return: The address of the new node, or NULL if it failed
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new_node = NULL, *temp = NULL;
-	unsigned int i = 0;
+	dlistint_t *tmp;
+	dlistint_t *new_node;
+	unsigned int counter;
 
-	new_node = create_dnode(n);
-	if (!new_node)
+	if (h == NULL || (*h == NULL && idx != 0))
 		return (NULL);
-	if (!h || !(*h)) /* NULL DLL */
-		*h = new_node;
-	else /* DLL exists */
+	new_node = create_node(n);
+	if (new_node == NULL)
+		return (NULL);
+	tmp = *h;
+	if (idx == 0)
 	{
-		temp = *h;
-		/* advance to pos of idx in DLL */
-		while (idx != i++ && temp->next)
-			temp = temp->next;
-		if (temp->next)
-			new_node->prev = temp->prev;
+		if (*h == NULL)
+			*h = new_node;
 		else
-			new_node->prev = temp;
-		if (idx == i) /* only happens when at end of DLL */
 		{
-			temp->next = new_node;
-			new_node->prev = temp;
+			new_node->next = tmp;
+			tmp->prev = new_node;
+			*h = new_node;
 		}
-		else if (idx == i - 1) /* insert at head or middle */
-		{
-			if (temp->prev)
-				temp->prev->next = new_node;
-			else /* head of LL */
-				*h = new_node;
-			temp->prev = new_node;
-			new_node->next = temp;
-		}
-		else /* index is out of range */
-		{
-			free(new_node);
-			return (NULL);
-		}
+		return (new_node);
 	}
-	return (new_node);
+	for (counter = 0; tmp->next != NULL || counter + 1 == idx; counter++)
+	{
+		if (counter + 1 == idx)
+		{
+			if (tmp->next != NULL)
+				tmp->next->prev = new_node;
+			new_node->next = tmp->next;
+			tmp->next = new_node;
+			new_node->prev = tmp;
+			return (new_node);
+		}
+		tmp = tmp->next;
+	}
+	free(new_node);
+	return (NULL);
 }
